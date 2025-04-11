@@ -1,4 +1,16 @@
 class UsersController < ApplicationController
+  def show
+    if current_user
+      render json: {
+        id: current_user.id,
+        name: current_user.name,
+        email: current_user.email
+      }
+    else
+      render json: {}, status: :unauthorized
+    end
+  end
+
   def create
     user = User.new(
       name: params[:name],
