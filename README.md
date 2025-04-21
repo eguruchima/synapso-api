@@ -65,10 +65,10 @@ Make sure you have a PostgreSQL server running locally or hosted. Update `config
 
 ---
 
-## Installation & Setup
+<!-- ## Installation & Setup
 
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/your-username/synapso-api.git
    cd synapso-api
-   ```
+   ``` -->
