@@ -58,4 +58,24 @@ assert_difference "Note.count", 1 do
 
   assert_response :success
   end
+
+  test "update" do
+    user = User.create!(
+      name: "Updater",
+      email: "update@example.com",
+      password: "password",
+      password_confirmation: "password"
+    )
+    note = Note.create!(
+      title: "Old Title",
+      content: "Stale content",
+      user: user
+    )
+
+    patch "/notes/#{note.id}.json", params: { title: "New Title" }
+    assert_response :success
+
+    data = JSON.parse(response.body)
+    assert_equal "New Title", data["title"]
+  end
 end
