@@ -78,4 +78,23 @@ assert_difference "Note.count", 1 do
     data = JSON.parse(response.body)
     assert_equal "New Title", data["title"]
   end
+
+  test "destroy" do
+    user = User.create!(
+      name: "Destroyer",
+      email: "destroy@example.com",
+      password: "password",
+      password_confirmation: "password"
+    )
+    note = Note.create!(
+      title: "To Be Deleted",
+      content: "This will go away",
+      user: user
+    )
+
+    assert_difference "Note.count", -1 do
+      delete "/notes/#{note.id}.json"
+    end
+    assert_response :no_content
+  end
 end
