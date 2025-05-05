@@ -1,6 +1,8 @@
 class NotesController < ApplicationController
+  before_action :authenticate_user
+
   def index
-    @notes = Note.all
+    @notes = current_user.notes
     render :index
   end
 
@@ -13,7 +15,7 @@ class NotesController < ApplicationController
     @note = Note.create(
       title: params[:title],
       content: params[:content],
-      user_id: params[:user_id]
+      user_id: current_user.id
     )
     render :show
   end
